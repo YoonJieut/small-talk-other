@@ -9,6 +9,8 @@ const container = document.querySelector(".container");
 // addEventListener의 비동기를 빼주고 여기에 몰빵하여
 // async를 최대한 컨트롤해본다.
 async function loadNextScript() {
+  container.innerHTML = '';  // 내용 초기화
+  container.scrollTop = 0; // 스크롤 위치 맨 위로 설정
   if (currentScriptIndex < scriptOrder.length) {
       const scriptName = scriptOrder[currentScriptIndex];
       const { messages } = await import(`../scriptData/${scriptName}.js`);
@@ -24,8 +26,6 @@ async function loadNextScript() {
 
 // 메세지 입력하는 함수
 async function displayScript(script) {
-    container.innerHTML = '';  // 내용 초기화
-    container.scrollTop = 0; // 스크롤 위치 맨 위로 설정
     script.forEach(message => {
         const messageDiv = document.createElement('div');
         messageDiv.classList.add('message', message.type);
