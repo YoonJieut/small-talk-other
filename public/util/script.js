@@ -21,6 +21,10 @@ async function loadNextScript() {
   // 모든 스크립트가 표시되었다면 분기 선택 버튼 표시
   if (currentScriptIndex === scriptOrder.length) {
     displayBranchButtons();
+
+    // 생성되고 이벤트 삭제
+    // 이러면 닷시는 내용을 추가할 수 없게 되버린다...
+    container.removeEventListener('click', loadNextScript)
   }
 }
 
@@ -57,9 +61,6 @@ function displayBranchButtons() {
   const btn1 = document.createElement("button");
   btn1.innerText = "분기 1로 가기";
   btn1.onclick = async () => {
-    // 버튼 삭제
-    container.innerHTML = '';  // 내용 초기화
-    container.scrollTop = 0; // 스크롤 위치 맨 위로 설정
     const { messages } = await import("../scriptData/data2-1.js");
     displayScript(messages);
   };
@@ -67,8 +68,6 @@ function displayBranchButtons() {
   const btn2 = document.createElement("button");
   btn2.innerText = "분기 2로 가기";
   btn2.onclick = async () => {
-    container.innerHTML = '';  // 내용 초기화
-    container.scrollTop = 0; // 스크롤 위치 맨 위로 설정
     const { messages } = await import("../scriptData/data2-2.js");
     displayScript(messages);
   };
