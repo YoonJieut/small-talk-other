@@ -8,6 +8,7 @@ let currentScriptIndex = 0;
 
 const container = document.querySelector(".container");
 
+// 메세지 입력하는 함수
 function displayScript(script) {
     script.forEach(message => {
         const messageDiv = document.createElement('div');
@@ -35,6 +36,8 @@ function displayScript(script) {
     });
 }
 
+// 컨테이너 클릭시 다음으로 넘어가는 이벤트 설정
+// 단, 마지막에 다다르면 버튼을 생성한다.
 container.addEventListener('click', () => {
   container.innerHTML = '';  // 내용 초기화
   container.scrollTop = 0; // 스크롤 위치 맨 위로 설정
