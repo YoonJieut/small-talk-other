@@ -67,3 +67,12 @@ body {
   color: #333;
   order: 1;
 }
+
+.narration {
+  background-color: #f1f1f1;  /* 흰색 배경 */
+  margin: 10px 0;             /* 위아래 마진 추가 */
+  padding: 10px;              /* 패딩 추가 */
+  border-radius: 5px;         /* 모서리 둥글게 */
+  text-align: center;         /* 중앙 정렬 */
+  font-style: italic;         /* 이탤릭체 */
+}
