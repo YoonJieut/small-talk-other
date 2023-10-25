@@ -1,8 +1,9 @@
-const scriptOrder = ['data', 'data1-1', 'data1-2', 'data1-3'];
-let currentScriptIndex = 0;
 import { messages } from "../scriptData/data.js";
 
+const scriptOrder = ['data', 'data1-1', 'data1-2', 'data1-3'];
 const container = document.querySelector(".container");
+
+let currentScriptIndex = 0;
 
 
 // 다음 스크립트를 await로 import하는 방식의 모듈화
@@ -16,11 +17,10 @@ async function loadNextScript() {
       const { messages } = await import(`../scriptData/${scriptName}.js`);
       displayScript(messages);
       currentScriptIndex++;
-
-      // 모든 스크립트가 표시되었다면 분기 선택 버튼 표시
-      if (currentScriptIndex === scriptOrder.length) {
-          displayBranchButtons();
-      }
+  }
+  // 모든 스크립트가 표시되었다면 분기 선택 버튼 표시
+  if (currentScriptIndex === scriptOrder.length) {
+    displayBranchButtons();
   }
 }
 
@@ -56,20 +56,26 @@ async function displayScript(script) {
 function displayBranchButtons() {
   const btn1 = document.createElement("button");
   btn1.innerText = "분기 1로 가기";
-
+  btn1.onclick = async () => {
+    // 버튼 삭제
+    container.innerHTML = '';  // 내용 초기화
+    container.scrollTop = 0; // 스크롤 위치 맨 위로 설정
+    const { messages } = await import("../scriptData/data2-1.js");
+    displayScript(messages);
+  };
 
   const btn2 = document.createElement("button");
   btn2.innerText = "분기 2로 가기";
-
+  btn2.onclick = async () => {
+    container.innerHTML = '';  // 내용 초기화
+    container.scrollTop = 0; // 스크롤 위치 맨 위로 설정
+    const { messages } = await import("../scriptData/data2-2.js");
+    displayScript(messages);
+  };
 
   container.appendChild(btn1);
   container.appendChild(btn2);
 }
-
-
-
-
-
 
 // 초기 로딩 시 첫번째 스크립트 표시
 displayScript(messages);
