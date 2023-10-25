@@ -1,5 +1,5 @@
 // data1-1.js
-export const messages = [
+export const messages1_1 = [
   {
       type: "left",
       author: "아르티옴",

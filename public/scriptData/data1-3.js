@@ -1,5 +1,5 @@
 // data1-3.js
-export const messages = [
+export const messages1_3 = [
   {
       type: "narration",
       text: "그렇게 함으로써 세르게이가 말한 대로 일상의 사건들이 플롯이 되는 걸까?"
