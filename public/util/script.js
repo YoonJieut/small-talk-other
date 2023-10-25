@@ -1,5 +1,6 @@
 const scriptOrder = ['data', 'data1-1', 'data1-2', 'data1-3'];
 let currentScriptIndex = 0;
+import { messages } from "../scriptData/data.js";
 
 const container = document.querySelector(".container");
 
@@ -66,5 +67,5 @@ container.addEventListener('click', async () => {
 
 
 // 초기 로딩 시 첫번째 스크립트 표시
-displayScript(scriptOrder[0]);
+displayScript(messages);
 currentScriptIndex++;
