@@ -36,10 +36,12 @@ function displayScript(script) {
 }
 
 container.addEventListener('click', () => {
-    if (currentScriptIndex < scripts.length) {
-        displayScript(scripts[currentScriptIndex]);
-        currentScriptIndex++;
-    }
+  container.innerHTML = '';  // 내용 초기화
+  container.scrollTop = 0; // 스크롤 위치 맨 위로 설정
+  if (currentScriptIndex < scripts.length) {
+      displayScript(scripts[currentScriptIndex]);
+      currentScriptIndex++;
+  }
 });
 
 // 초기 로딩 시 첫번째 스크립트 표시
