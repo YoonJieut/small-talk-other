@@ -1,4 +1,9 @@
 import { messages } from "./data.js";
+import { messages1_1 } from "./data1-1.js";
+import { messages1_2 } from "./data1-2.js";
+import { messages1_3 } from "./data1-3.js";
+import { messages2 } from "./data2.js";
+import { messages2_1 } from "./data2-1.js";
 
 const container = document.querySelector('.container');
 
