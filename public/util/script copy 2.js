@@ -42,25 +42,7 @@ container.addEventListener('click', () => {
       displayScript(scripts[currentScriptIndex]);
       currentScriptIndex++;
   }
-  if(currentScriptIndex === 4 ){
-    displayBranchButtons();
-  }
 });
-
-function displayBranchButtons() {
-  const btn1 = document.createElement("button");
-  btn1.innerText = "분기 1로 가기";
-
-
-  const btn2 = document.createElement("button");
-  btn2.innerText = "분기 2로 가기";
-
-
-  container.appendChild(btn1);
-  container.appendChild(btn2);
-}
-
-
 
 // 초기 로딩 시 첫번째 스크립트 표시
 displayScript(scripts[currentScriptIndex]);
