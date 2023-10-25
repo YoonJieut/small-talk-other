@@ -1,9 +1,4 @@
-import { messages } from '../scriptData/data.js';
-import { messages1_1 } from '../scriptData/data1-1.js';
-import { messages1_2 } from '../scriptData/data1-2.js';
-import { messages1_3 } from '../scriptData/data1-3.js';
-
-const scripts = [messages, messages1_1, messages1_2, messages1_3];
+const scriptOrder = ['data', 'data1-1', 'data1-2', 'data1-3'];
 let currentScriptIndex = 0;
 
 const container = document.querySelector(".container");
@@ -36,20 +31,7 @@ function displayScript(script) {
     });
 }
 
-// 컨테이너 클릭시 다음으로 넘어가는 이벤트 설정
-// 단, 마지막에 다다르면 버튼을 생성한다.
-container.addEventListener('click', () => {
-  container.innerHTML = '';  // 내용 초기화
-  container.scrollTop = 0; // 스크롤 위치 맨 위로 설정
-  if (currentScriptIndex < scripts.length) {
-      displayScript(scripts[currentScriptIndex]);
-      currentScriptIndex++;
-  }
-  if(currentScriptIndex === 4 ){
-    displayBranchButtons();
-  }
-});
-
+//버튼 생성 함수
 function displayBranchButtons() {
   const btn1 = document.createElement("button");
   btn1.innerText = "분기 1로 가기";
@@ -64,7 +46,25 @@ function displayBranchButtons() {
 }
 
 
+// 컨테이너 클릭시 다음으로 넘어가는 이벤트 설정
+// 단, 마지막에 다다르면 버튼을 생성한다.
+container.addEventListener('click', async () => {
+  container.innerHTML = '';  // 내용 초기화
+  container.scrollTop = 0; // 스크롤 위치 맨 위로 설정
+  if (currentScriptIndex < scriptOrder.length) {
+      const scriptName = scriptOrder[currentScriptIndex];
+      const { script } = await import(`../scriptData/${scriptName}.js`)
+      displayScript(script);
+      currentScriptIndex++;
+  }
+  if(currentScriptIndex === scriptOrder.length ){
+    displayBranchButtons();
+  }
+});
+
+
+
 
 // 초기 로딩 시 첫번째 스크립트 표시
-displayScript(scripts[currentScriptIndex]);
+displayScript(scriptOrder[0]);
 currentScriptIndex++;
