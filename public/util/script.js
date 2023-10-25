@@ -5,15 +5,6 @@ import { messages } from "../scriptData/data.js";
 const container = document.querySelector(".container");
 
 
-
-// 컨테이너 클릭시 다음으로 넘어가는 이벤트 설정
-// 단, 마지막에 다다르면 버튼을 생성한다.
-container.addEventListener('click', () => {
-  container.innerHTML = '';  // 내용 초기화
-  container.scrollTop = 0; // 스크롤 위치 맨 위로 설정
-  loadNextScript
-});
-
 // 다음 스크립트를 await로 import하는 방식의 모듈화
 // addEventListener의 비동기를 빼주고 여기에 몰빵하여
 // async를 최대한 컨트롤해본다.
@@ -21,7 +12,7 @@ async function loadNextScript() {
   if (currentScriptIndex < scriptOrder.length) {
       const scriptName = scriptOrder[currentScriptIndex];
       const { messages } = await import(`../scriptData/${scriptName}.js`);
-      displayMessages(messages);
+      displayScript(messages);
       currentScriptIndex++;
 
       // 모든 스크립트가 표시되었다면 분기 선택 버튼 표시
@@ -33,6 +24,8 @@ async function loadNextScript() {
 
 // 메세지 입력하는 함수
 async function displayScript(script) {
+    container.innerHTML = '';  // 내용 초기화
+    container.scrollTop = 0; // 스크롤 위치 맨 위로 설정
     script.forEach(message => {
         const messageDiv = document.createElement('div');
         messageDiv.classList.add('message', message.type);
@@ -81,3 +74,7 @@ function displayBranchButtons() {
 // 초기 로딩 시 첫번째 스크립트 표시
 displayScript(messages);
 currentScriptIndex++;
+
+// 컨테이너 클릭시 다음으로 넘어가는 이벤트 설정
+// 단, 마지막에 다다르면 버튼을 생성한다.
+container.addEventListener('click', loadNextScript);
